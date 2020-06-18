@@ -1,0 +1,36 @@
+{% extends "todo/base.html" %}
+
+<title>ToDo App</title>
+
+{% block body_block %}
+
+<div class="jumbotron">
+  <h1>ToDo App</h1>
+  <div class="list-group">
+
+    <ul>
+      {% for item in all_items %}
+      <h3><li class="list-group-item" >{{ item.content }}
+        <form action="/deleteTodo/{{item.id}}/" style = "display: inline;" method="post">
+          {% csrf_token %}
+        <input type="submit" value="Delete" class= "btn">
+        </form>
+      </li></h3>
+      {% endfor %}
+    </ul>
+
+  </div>
+ 
+
+
+
+  <form action="/addTodo/" method="post">
+    {% csrf_token %}
+    <i class="fas fa-clipboard-list"></i>
+    <input type="text" name = "content">
+    <input type="submit" value="Add" class="btn btn-primary">
+  </form>
+
+</div>
+
+{% endblock %}
